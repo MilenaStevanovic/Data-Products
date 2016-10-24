@@ -1,0 +1,33 @@
+---
+title: "My Schools in Serbia"
+author: "Milena Stevanovic"
+date: "24 October 2016"
+output: html_document
+---
+
+```{r, comment="", echo=FALSE, message=FALSE, warning=FALSE}
+library(leaflet)
+
+mySchools <- data.frame(
+  lat = c(44.772669, 44.755585, 44.770351, 44.267092),
+  lng = c(20.475286, 19.692918, 19.655549, 19.236693),
+  col = c("red", "blue", "orange", "green"),
+   stringsAsFactors = FALSE)
+
+sites <- c(
+  "<a href='http://www.fon.bg.ac.rs/eng/'>Faculty of Organizational Sciences</a>",
+  "<a href='http://www.sabackagimnazija.edu.rs/'>Grammar School in Sabac</a>",
+  "<a href='http://www.osmajur.edu.rs/'>Primary School in Majur</a>",
+  "<a href='http://www.osnt.edu.rs/'>Primary School in Velika Reka</a>"
+ )
+
+mySchools %>% 
+  leaflet() %>%
+  addTiles() %>%
+  fitBounds(19, 46, 22, 42) %>%
+  addCircles(color = mySchools$col, radius = c(10000), weight = 1, opacity = 1) %>%
+  addMarkers(popup = sites, options = markerOptions(title = c("Belgrade", "Sabac", "Majur", "Velika Reka"))) %>%
+  addLegend(labels = c("4. Faculty of Organizational Sciences in Belgrade", "3. Grammar School in Sabac", "2. Primary School in Majur", "1. Primary School in Velika Reka"), colors = c("red", "blue", "orange", "green"))
+  
+
+```
