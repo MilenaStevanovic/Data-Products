@@ -1,0 +1,46 @@
+---
+title: "Week 3 Assignment"
+author: "Milena Stevanovic"
+date: "10 November 2016"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+## ToothGrowth analysis
+
+- We want to analyze the ToothGrowth data in the R datasets package.
+
+- The goal is to compare tooth growth by supplemment and dose.
+
+- We will use basic exploratory data analyses.
+
+## Effect of Dosage by Supplement Type
+
+```{r, message=FALSE, warning=FALSE}
+library("plotly")
+data(ToothGrowth)
+colnames(ToothGrowth)<-c("Length", "Supplement", "Dose")
+ToothGrowth$Dose<-as.factor(ToothGrowth$Dose)
+plot_ly(ToothGrowth, x = ~Supplement, y = ~Length, color = ~Dose, type = "box", boxpoints = "all", jitter = 0.2, pointpos = -1.2) %>% layout(boxmode = "group")
+```
+
+## Effect of Supplement Type by Dosage
+
+```{r, message=FALSE, warning=FALSE}
+library("plotly")
+data(ToothGrowth)
+colnames(ToothGrowth)<-c("Length", "Supplement", "Dose")
+ToothGrowth$Dose<-as.factor(ToothGrowth$Dose)
+plot_ly(ToothGrowth, x = ~Dose, y = ~Length, color = ~Supplement, type = "box", boxpoints = "all", jitter = 0.2, pointpos = -1.2) %>% layout(boxmode = "group")
+```
+
+## Conclusions
+
+Final conclusions from this analysis are:
+
+- Increasing the dose level leads to increased tooth growth.
+
+- Supplemment OJ leads to increased tooth growth comparing to supplemment VC when dose is 0.5 or 1. But, when dose is 2, it is uncertain whether there will be a greater effect from either OJ or VC.
